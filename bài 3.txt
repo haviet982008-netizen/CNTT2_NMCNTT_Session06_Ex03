@@ -1,0 +1,23 @@
+﻿BÁO CÁO THỰC HÀNH
+1. Phân tích luồng dữ liệu
+PIPELINE POWERSHELL: Dữ liệu truyền trực tiếp trong RAM
+* 01. ĐỌC FILE
+   * Get-Content
+   * Từng dòng access.log
+   *  stdout / stdin
+   * 02. LỌC DÒNG
+   * Where-Object
+   * Ngày hôm nay + TIMEOUT
+   *  stdout / stdin
+      * 03. ĐẾM DÒNG
+      * Measure-Object -Line
+      * Lấy Lines  một con số
+         * Chi tiết câu lệnh phụ:
+         * Where-Object: Giữ các dòng của hôm nay có chứa TIMEOUT.
+         * Measure-Object -Line: Đếm các dòng được giữ lại.
+2. Câu lệnh triển khai
+Get-Content .\access.log | Select-String "TIMEOUT" | Measure-Object -Line 
+Giải thích
+         1. Get-Content .\access.log: Đọc nội dung file log (stdout).
+         2. | Select-String "TIMEOUT": Lọc các dòng chứa từ khóa lỗi (stdin  lọc  stdout).
+         3. Measure-Object -Line: Đếm tổng số dòng khớp và trả về đúng một con số nguyên.
