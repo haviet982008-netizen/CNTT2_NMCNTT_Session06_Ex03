@@ -1,0 +1,14 @@
+﻿BÁO CÁO THỰC HÀNH
+1. Phân tích luồng dữ liệu
+  
+
+-Sơ đồ 3 bước:
++Get-Content: đọc từng dòng
++Where-Object: giữ các dòng của hôm nay có từ TIMEOUT
++Measure-Object -Line: đếm các dòng được giữ lại
+2. Câu lệnh triển khai
+Get-Content .\access.log | Select-String "TIMEOUT" | Measure-Object -Line 
+Giải thích
+1. Get-Content .\access.log: Đọc nội dung file log (stdout).
+2. | Select-String "TIMEOUT": Lọc các dòng chứa từ khóa lỗi (stdin  lọc  stdout).
+3. Measure-Object -Line: Đếm tổng số dòng khớp và trả về đúng một con số nguyên.
